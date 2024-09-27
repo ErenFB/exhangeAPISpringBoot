@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exchange Rate Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            margin: 50px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .result-container {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #d1ffd1;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Find Exchange Rate</h2>
+    <form action="/rate/getoneratebymoneyname" method="GET">
+        <label for="moneyName">Enter Currency Code:</label>
+        <input type="text" id="moneyName" name="moneyName" required>
+
+        <input type="submit" value="Get Exchange Rate">
+    </form>
+
+    <div class="result-container" th:if="${moneyEntity != null}">
+        <h3>Exchange Rate Result</h3>
+        <p><strong>Currency:</strong> <span th:text="${moneyEntity.moneyName}"></span></p>
+        <p><strong>Rate:</strong> <span th:text="${moneyEntity.moneyAmount}"></span></p>
+    </div>
+</div>
+</body>
+</html>
